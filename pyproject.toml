@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "cw2"
+name = "cw"
 version = "0.1.0"
 description = ""
 authors = ["Alex Konanau"]
@@ -11,7 +11,10 @@ ultralytics = "^8.2.23"
 platformdirs = "^4.2.2"
 wget = "^3.2"
 fastapi = "^0.111.0"
+from-root = "^1.3.0"
 
+[tool.poetry.scripts]
+api = "cw.__main__:main"
 
 [build-system]
 requires = ["poetry-core"]

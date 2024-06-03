@@ -421,6 +421,17 @@ unicode = ["unicodedata2 (>=15.1.0)"]
 woff = ["brotli (>=1.0.1)", "brotlicffi (>=0.8.0)", "zopfli (>=0.1.4)"]
 
 [[package]]
+name = "from-root"
+version = "1.3.0"
+description = "Forget about working directory errors"
+optional = false
+python-versions = ">=3.7,<4.0"
+files = [
+    {file = "from_root-1.3.0-py3-none-any.whl", hash = "sha256:7446a9b6481e668329cc11ad0a234fe4c83c63468c652e037d02846a75c726f8"},
+    {file = "from_root-1.3.0.tar.gz", hash = "sha256:da1359f5faabca367f685cac927cb2f307bb35c488fdd0361f963d6f1cd2674f"},
+]
+
+[[package]]
 name = "fsspec"
 version = "2024.5.0"
 description = "File-system specification"
@@ -2422,4 +2433,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "aa3b24bfe79f5d0fc8e5853ed7eec49f1fbfaedb159d57ec271ae2e122d950f0"
+content-hash = "1055cfdacdb1d8325afb386437f8d5b500abf71c38e18f5ad23f023604a2db81"
