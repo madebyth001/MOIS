@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Image</title>
+</head>
+<body>
+    <h1>Upload Image</h1>
+    <input type="file" id="fileInput" accept="image/*">
+    <button id="uploadButton">Upload Image</button>
+    <p id="status"></p>
+    <img id="grayscaleImage" style="display:none;" />
+
+    <script>
+        document.getElementById('uploadButton').addEventListener('click', function() {
+            const fileInput = document.getElementById('fileInput');
+            if (!fileInput.files.length) {
+                alert("Please select an image file first");
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+
+            reader.onload = function() {
+                const base64Image = reader.result.split(',')[1]; // Extract base64 part of the Data URL
+
+                // Send the base64 image to the FastAPI endpoint
+                fetch('http://127.0.0.1:8000/upload-image/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ image: base64Image })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.img_with_prediction) {
+                        document.getElementById('status').textContent = 'Image processed successfully';
+
+                        // Display the grayscale image
+                        const grayscaleImage = document.getElementById('grayscaleImage');
+                        grayscaleImage.src = 'data:image/png;base64,' + data.img_with_prediction;
+                        grayscaleImage.style.display = 'block';
+                    } else {
+                        document.getElementById('status').textContent = 'Error processing image';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('status').textContent = 'Error uploading image';
+                });
+            };
+
+            reader.onerror = function(error) {
+                console.error('Error reading file:', error);
+                document.getElementById('status').textContent = 'Error reading file';
+            };
+        });
+    </script>
+</body>
+</html>

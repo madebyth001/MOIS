@@ -1,0 +1,9 @@
+path: /Users/madebyth/PycharmProjects/cw2-master/dataset
+train: images/train
+val: images/val
+
+names:
+  0: bus
+  1: marsh
+  2: sch
+  3: trolleybus
